@@ -1712,7 +1712,7 @@ restclient.main = {
       (sign.remember === true) ? sign_remember.attr('checked', true) : sign_remember.removeAttr('checked');
     }
 
-    $('#signature-request .btnInsertAsHeader').bind('click', restclient.main.oauthSign);
+    $('.btnInsertAsHeader').bind('click', restclient.main.oauthSign);
   },
   oauthSign: function () {
     var sign_consumer_key         = $('#signature-request [name="consumer_key"]'),
