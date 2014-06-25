@@ -42,11 +42,11 @@ restclient.oauth = {
     //restclient.log(arg);
     if(arg.action)
       this.setAction(arg.action);
-    if(arg.signatures)
+    if('signatures' in arg)
       this.setSignatures(arg.signatures);
-    if(arg.parameters)
+    if('parameters' in arg)
       this.setParameters(arg.parameters);
-    if(arg.path)
+    if('path' in arg)
       this.setPath(arg.path);
     if(typeof arg.realm !== 'undefined')
       this._realm = arg.realm;
@@ -96,26 +96,26 @@ restclient.oauth = {
     if(!this._secrets)
       this._secrets = {};
 
-    if(signatures.consumer_key)
+    if('consumer_key' in signatures)
       this._secrets.consumer_key = signatures.consumer_key;
     else
       throw('Missing required consumer_key in resclient.oauth.setSignatures');
 
-    if(signatures.consumer_secret)
+    if('consumer_secret' in signatures)
       this._secrets.consumer_secret = signatures.consumer_secret;
     else
       throw('Missing required consumer_secret in resclient.oauth.setSignatures');
 
-    if(signatures.access_token)
+    if('access_token' in signatures)
       this._secrets.oauth_token = signatures.access_token;
 
-    if(signatures.access_secret)
+    if('access_secret' in signatures)
       this._secrets.oauth_secret = signatures.access_secret;
 
-    if(signatures.oauth_token)
+    if('oauth_token' in signatures)
       this._secrets.oauth_token = signatures.oauth_token;
 
-    if(signatures.oauth_token_secret)
+    if('oauth_token_secret' in signatures)
       this._secrets.oauth_secret = signatures.oauth_token_secret;
 
     if(typeof signatures.oauth_token == 'string' && typeof this._secrets.oauth_secret == 'undefined')
@@ -141,22 +141,22 @@ restclient.oauth = {
       this._parameters = {};
 
     $.extend(this._parameters, p);
-    if (!p['oauth_nonce'])
+    if (!('oauth_nonce' in p))
       this._parameters.oauth_nonce = this.getNonce();
 
-    if (!p['oauth_timestamp'])
+    if (!('oauth_timestamp' in p))
       this._parameters.oauth_timestamp = this.getTimeStamp();
 
-    if (!p['oauth_version'])
+    if (!('oauth_version' in p))
       this._parameters.oauth_version = '1.0';
 
-    if (!p['oauth_signature_method'])
+    if (!('oauth_signature_method' in p))
       this.setSignatureMethod();
 
-    if (!p['oauth_consumer_key'])
+    if (!('oauth_consumer_key' in p))
         this.setConsumerKey();
 
-    if(!p['oauth_token'])
+    if(!('oauth_token' in p))
         this.setAccessToken();
   },
   generateSignature: function(str){
